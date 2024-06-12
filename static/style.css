@@ -1,0 +1,9 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.card:hover {
+    -webkit-box-shadow: -55px 19px 136px -12px rgba(22,49,224,0.37);
+    -moz-box-shadow: -55px 19px 136px -12px rgba(22,49,224,0.37);
+    box-shadow: -55px 19px 136px -12px rgba(22,49,224,0.37);
+}

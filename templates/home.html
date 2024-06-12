@@ -1,0 +1,48 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block content %}
+
+{% if not user.is_authenticated  %}
+<div class='row d-flex  justify-content-between flex-wrap align-items-center ms-2 p-5 gap-2'>
+
+ <div class='col-lg-5'>
+  <h1>Welcome to BDCARMART</h1>
+  <p>
+    Welcome to BD CARMART - Your Ultimate Destination for Buying CARS!
+    Whether you're in the market for a sleek sedan, a rugged SUV, or a powerful sports car, you've come to the right place. At BD CARMART, we strive to provide a seamless and enjoyable experience for  buyers .
+    Browse through our extensive collection of high-quality vehicles, meticulously curated to suit every taste and budget. With detailed listings and comprehensive information, finding your dream car has never been easier.
+
+    Join our community of car enthusiasts today and embark on your journey towards finding the perfect ride. Whether you're buying , BD CARMART is here to make your automotive dreams a reality
+  </p>
+ </div>
+ <div class='col-lg-6 align-items-center' >
+    <img  src="{% static 'car1.jpg'%}" style='width:100%;' alt="This is a car">
+ </div>
+</div>
+{% endif %}
+ 
+   <div class='row  justify-content-evenly mt-1 mb-1 m-auto'>
+      <h4 class='text-center'>Sory By Brand</h4>
+      <div class='d-flex flex-wrap p-4 justify-content-center'>
+         {% for brand in brands%}
+          <a href="{% url 'brand' brand.slug%}" class='btn m-1 btn-secondary btn-sm text-white text-decoration-none'>
+            {{brand.name}}
+          </a>
+          {% endfor%}
+      </div>
+   {% for car in cars %}
+   <div class="card  text-dark bg-secondary col-4  mt-2 p-2 justify-content-center" style="width:25rem;">
+    <img src="{{car.image.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <a href="{% url 'details' car.id%}" class='text-decoration-none text-dark'> <h4>name: {{car.name}}</h4></a>
+        <small><b>price: {{car.price}}</b><br>
+         quantity: {{car.quantity}} <br>
+        Discription: {{car.description | truncatewords:5}}</small> <br>
+        {% if user.is_authenticated %}
+             <a href="{% url 'buy' car.id%}" class='btn mt-1 btn-sm btn-success'>Buy Now</a>
+        {% endif %}
+    </div>
+  </div>
+   {% endfor %}
+</div>
+{% endblock content %}
